@@ -69,7 +69,7 @@ MONGO_URI=<your_mongodb_connection_string>
 JWT_SECRET=<your_jwt_secret>
 Start the backend server:
 npm run dev
-Frontend
+### Frontend
 Navigate to the frontend directory:
 cd frontend
 Install dependencies:
