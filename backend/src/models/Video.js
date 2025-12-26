@@ -1,8 +1,16 @@
+const mongoose = require("mongoose")
 
-const mongoose = require("mongoose");
-module.exports = mongoose.model("Video", new mongoose.Schema({
+const videoSchema = new mongoose.Schema({
   filename: String,
-  path: String,
-  status: String,
-  progress: Number
-}, { timestamps: true }));
+  status: {
+    type: String,
+    enum: ["PROCESSING", "SAFE", "FLAGGED"],
+    default: "PROCESSING",
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+})
+
+module.exports = mongoose.model("Video", videoSchema)

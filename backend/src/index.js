@@ -1,24 +1,17 @@
-const app = require("./app");
-const http = require("http");
-const { Server } = require("socket.io");
-require("dotenv").config();
+require("dotenv").config()
+const http = require("http")
+const app = require("./app")
+const connectDB = require("./config/db")
+const { initSocket } = require("./socket")
 
-const server = http.createServer(app);
+connectDB()
 
-const io = new Server(server, {
-  cors: {
-    origin: "*"
-  }
-});
+const server = http.createServer(app)
 
-app.set("io", io);
+initSocket(server)
 
-io.on("connection", (socket) => {
-  console.log("Socket connected:", socket.id);
-});
-
-const PORT = process.env.PORT || 5000;
-
+const PORT = process.env.PORT || 5000
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  console.log(`Server running on port ${PORT}`)
+})
+
